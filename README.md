@@ -1,34 +1,107 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Task Management App
 
-## Getting Started
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-First, run the development server:
+A simple, responsive task management application built with Next.js and React. Manage your tasks efficiently with features like priority-based sorting and persistent storage.
 
-```bash
-npm run dev
-# or
-yarn dev
+## 🚀 Features
+
+- [x] Add, edit, and delete tasks
+- [x] Mark tasks as completed
+- [x] Automatic sorting of tasks by priority
+- [x] Persistent storage using localStorage
+- [x] Server-side rendering for initial load
+- [x] Responsive design
+
+## 📸 Screenshots
+
+<details>
+<summary>Click to view screenshots</summary>
+
+### Task List
+
+![Task List](./public/task-list.png)
+
+### Add Task
+
+![Add Task](./public/add-task.png)
+
+### Edit Task
+
+![Edit Task](./public/edit-task.png)
+
+</details>
+
+## 🛠️ Setup Instructions
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/lokendra-singh-rao/task-management.git
+   cd task-management-app
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Run the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## 🧠 Approach for Sorting Tasks by Priority
+
+We implement task sorting using a custom function in `utils/taskUtils.js`:
+
+1. Tasks are first sorted by completion status (incomplete before complete).
+2. Within each completion group, tasks are sorted by priority.
+3. Priority order: High > Medium > Low.
+
+<details>
+<summary>View sorting function</summary>
+
+```javascript
+const priorityOrder = { high: 1, medium: 2, low: 3 };
+
+export function sortTasks(tasks) {
+  return tasks.sort((a, b) => {
+    if (a.completed !== b.completed) {
+      return a.completed ? 1 : -1;
+    }
+    return priorityOrder[a.priority] - priorityOrder[b.priority];
+  });
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+</details>
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+This sorting is applied whenever tasks are added, updated, or toggled as complete.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## 🛠️ Technologies Used
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- Next.js
+- React
+- CSS for styling
+- localStorage for data persistence
 
-## Learn More
+## 🤝 Contributing
 
-To learn more about Next.js, take a look at the following resources:
+Contributions, issues, and feature requests are welcome! Feel free to check [issues page](https://github.com/lokendra-singh-rao/task-management/issues).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📝 License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+This project is [MIT](https://opensource.org/licenses/MIT) licensed.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<div align="center">
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Made with ❤️ by [Lokendra Singh Rao]
+
+</div>
